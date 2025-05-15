@@ -1,0 +1,65 @@
+data:
+  raw_data: data/raw/symptoms2diseases.csv
+  processed_train: data/processed/train.csv
+  processed_test: data/processed/test.csv
+  test_size: 0.2
+  random_state: 42
+
+preprocessing:
+  max_length: 512
+  lowercase: true
+  remove_punctuation: true
+  stopwords: english
+
+models:
+  svm:
+    C: 1.0
+    kernel: rbf
+    max_iter: 1000
+  
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 2
+    random_state: 42
+  
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+    solver: lbfgs
+  
+  albert:
+    model_name: albert-base-v2
+    max_length: 256
+    batch_size: 16
+    learning_rate: 2e-5
+    epochs: 3
+
+training:
+  batch_size: 32
+  validation_split: 0.1
+  early_stopping_patience: 3
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+
+mlflow:
+  experiment_name: medical_symptom_classification
+  registry_name: medical-symptom-classifier
+
+dvc:
+  cache: true
+  remote:
+    name: minio
+    url: s3://dvc
+    endpointurl: http://localhost:9000
+    access_key_id: minioadmin
+    secret_access_key: minioadmin
+
+evaluation:
+  metrics_dir: reports/metrics
+  plots_dir: reports/plots
+  confusion_matrix: true
+  classification_report: true
