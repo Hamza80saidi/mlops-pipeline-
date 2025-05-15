@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python scripts/prepare_data.py
+    deps:
+    - path: scripts/prepare_data.py
+      hash: md5
+      md5: 5935a6944eff5c73d0d4c9913600c652
+      size: 1296
+    outs:
+    - path: data/processed/label_mapping.yaml
+      hash: md5
+      md5: 321ec66d2d5b554c29238d2a1c746a4e
+      size: 2742
+    - path: data/processed/test.csv
+      hash: md5
+      md5: fc0f3e83587539fb3ac4722f47bd82c0
+      size: 47333
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 03963047edc597786ea6c41ed8241b91
+      size: 186855

@@ -3,67 +3,24 @@ stages:
     cmd: python scripts/prepare_data.py
     deps:
       - scripts/prepare_data.py
-      - data/raw/symptoms2diseases.csv
-    params:
-      - data.test_size
-      - data.random_state
-      - preprocessing
     outs:
       - data/processed/train.csv
       - data/processed/test.csv
       - data/processed/label_mapping.yaml
   
-  train_model:
-    foreach:
-      - svm
-      - random_forest
-      - logistic_regression
-      - albert
-    do:
-      cmd: python scripts/train.py --model ${item}
-      deps:
-        - scripts/train.py
-        - data/processed/train.csv
-        - data/processed/label_mapping.yaml
-        - src/ml/models/
-        - src/ml/strategies/
-        - src/ml/preprocessing/
-      params:
-        - models.${item}
-        - training
-        - mlflow
-      outs:
-        - models/${item}/model.pkl
-        - models/${item}/vectorizer.pkl:
-            persist: true
-        - models/${item}/metrics.json
-      metrics:
-        - models/${item}/metrics.json:
-            cache: false
-            persist: true
-  
-  evaluate:
-    foreach:
-      - svm
-      - random_forest
-      - logistic_regression
-      - albert
-    do:
-      cmd: python scripts/evaluate.py --model ${item}
-      deps:
-        - scripts/evaluate.py
-        - data/processed/test.csv
-        - data/processed/label_mapping.yaml
-        - models/${item}/model.pkl
-        - models/${item}/vectorizer.pkl
-      params:
-        - models.${item}
-        - evaluation
-      outs:
-        - reports/metrics/${item}_evaluation.json
-        - reports/plots/${item}_confusion_matrix.png
-        - reports/plots/${item}_classification_report.png
-      metrics:
-        - reports/metrics/${item}_evaluation.json:
-            cache: false
-            persist: true
+  train_models:
+    cmd: python scripts/train_all_models.py
+    deps:
+      - scripts/train_all_models.py
+      - data/processed/train.csv
+    outs:
+      - models/
+    
+  evaluate_models:
+    cmd: python scripts/evaluate_all_models.py
+    deps:
+      - scripts/evaluate_all_models.py
+      - data/processed/test.csv
+      - models/
+    outs:
+      - reports/
