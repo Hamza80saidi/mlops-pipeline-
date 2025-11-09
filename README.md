@@ -1,3 +1,4 @@
+ HEAD
 📊 MLOps Pipeline for Text Classification
 
 ## 📌 Project Overview
@@ -51,7 +52,7 @@ mlops-pipeline/
 
 ### 1. Clone the repository
 
-git clone https://github.com/yourusername/mlops-pipeline.git
+git clone https://github.com/yourusername/mlops-pipeline-.git
 cd mlops-pipeline
 ### 2. Create a virtual environment
 
@@ -95,3 +96,4 @@ A/B testing for new models
 
 ###  Author
 Developed by HAMZA SAIDI - AKRAM TAYEB - EL MEHDI EL MAHLALI Contact: saidih794@gmail.com
+
