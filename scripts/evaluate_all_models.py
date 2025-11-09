@@ -1,12 +1,17 @@
 import os
+import sys
 import yaml
 import json
 import argparse
-from evaluate import main as evaluate_model
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+
+# Add the project root to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from scripts.evaluate import main as evaluate_model
 
 def create_comparison_plot(all_metrics, output_path):
     """Create a comparison plot of all models"""
@@ -84,6 +89,8 @@ def main():
             
         except Exception as e:
             print(f"✗ Error evaluating {model_name}: {e}")
+            import traceback
+            traceback.print_exc()
     
     # Create summary report
     summary = {

@@ -1,7 +1,12 @@
 import os
+import sys
 import yaml
 import argparse
-from train import main as train_model
+
+# Add the project root to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from scripts.train import main as train_model
 
 def main():
     """Train all models defined in params.yaml"""
@@ -26,8 +31,10 @@ def main():
             print(f"✓ {model_name} trained successfully")
         except Exception as e:
             print(f"✗ Error training {model_name}: {e}")
+            import traceback
+            traceback.print_exc()
     
     print("\nAll models trained!")
 
 if __name__ == "__main__":
-    main()
+    main() 

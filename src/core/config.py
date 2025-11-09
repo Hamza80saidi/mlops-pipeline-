@@ -3,8 +3,8 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # API Configuration
-    aws_access_key_id: str = "admin"
-    aws_secret_access_key: str = "admin"
+    aws_access_key_id: str = "minioadmin"
+    aws_secret_access_key: str = "minioadmin"
     mlflow_registry_name: str = "medical-symptom-classifier"
 
     PROJECT_NAME: str = "Medical Symptom Classifier"
@@ -18,15 +18,15 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./users.db"
     
     # MLflow
-    MLFLOW_TRACKING_URI: str = "http://mlflow:5000"
-    MLFLOW_S3_ENDPOINT_URL: str = "http://minio:9000"
+    MLFLOW_TRACKING_URI: str = "http://localhost:5000"
+    MLFLOW_S3_ENDPOINT_URL: str = "http://localhost:9000"
     MLFLOW_BUCKET: str = "mlflow"
     
     # MinIO
     MINIO_ACCESS_KEY: str = "minioadmin"
     MINIO_SECRET_KEY: str = "minioadmin"
-    MINIO_ENDPOINT: str = "minio:9000"
-    
+    MINIO_ENDPOINT: str = "http://localhost:9000"
+
     # DVC
     DVC_REMOTE_URL: str = "s3://dvc/data"
     
@@ -35,8 +35,8 @@ class Settings(BaseSettings):
     MODEL_STAGE: str = "Production"
     
     # Prometheus
-    PROMETHEUS_PORT: int = 8001
-    
+    PROMETHEUS_PORT: int = 9090
+
     class Config:
         env_file = ".env"
 

@@ -16,16 +16,26 @@
 global:
   scrape_interval: 15s
   evaluation_interval: 15s
+  external_labels:
+    monitor: 'mlops-medical'
 
 scrape_configs:
-  # Local API endpoint - use host.docker.internal for Docker Desktop
+  # API metrics
   - job_name: 'api'
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    metrics_path: /metrics
     static_configs:
-      - targets: ['host.docker.internal:8001']
-    metrics_path: '/metrics'
-  
-  # MLflow metrics
-  - job_name: 'mlflow'
+      - targets: ['host.docker.internal:8000']
+        labels:
+          service: 'medical-api'
+    
+    # For Linux hosts, use one of these instead:
+    # - targets: ['172.17.0.1:8000']  # Docker host IP
+    # - targets: ['host-gateway:8000']  # Docker 20.10+
+    # - targets: ['10.0.0.1:8000']  # Your actual host IP
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
     static_configs:
-      - targets: ['mlflow:5000']
-    metrics_path: '/metrics'
+      - targets: ['localhost:9090']

@@ -5,13 +5,13 @@ stages:
     deps:
     - path: scripts/prepare_data.py
       hash: md5
-      md5: 5935a6944eff5c73d0d4c9913600c652
-      size: 1296
+      md5: 8fa4dc053f098b221b585219b3204f13
+      size: 3356
     outs:
     - path: data/processed/label_mapping.yaml
       hash: md5
-      md5: 321ec66d2d5b554c29238d2a1c746a4e
-      size: 2742
+      md5: bded295cdb3575adf006eb217ea7c2a5
+      size: 432
     - path: data/processed/test.csv
       hash: md5
       md5: fc0f3e83587539fb3ac4722f47bd82c0
@@ -20,3 +20,42 @@ stages:
       hash: md5
       md5: 03963047edc597786ea6c41ed8241b91
       size: 186855
+  train_models:
+    cmd: python scripts/train_all_models.py
+    deps:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 03963047edc597786ea6c41ed8241b91
+      size: 186855
+    - path: scripts/train_all_models.py
+      hash: md5
+      md5: af83f6f570a1736492f38906d5e2a3c8
+      size: 1129
+    outs:
+    - path: models/
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+  evaluate_models:
+    cmd: python scripts/evaluate_all_models.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: fc0f3e83587539fb3ac4722f47bd82c0
+      size: 47333
+    - path: models/
+      hash: md5
+      md5: d751713988987e9331980363e24189ce.dir
+      size: 0
+      nfiles: 0
+    - path: scripts/evaluate_all_models.py
+      hash: md5
+      md5: b6ee17bfa88c4026aabc2c5cf29a9b00
+      size: 3781
+    outs:
+    - path: reports/
+      hash: md5
+      md5: f103bf2661fef1f6af9ec049b2bcfe31.dir
+      size: 128
+      nfiles: 1
