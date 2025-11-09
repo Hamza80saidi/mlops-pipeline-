@@ -94,5 +94,6 @@ Automated CI/CD pipeline
 A/B testing for new models
 
 ###  Author
-Developed by HAMZA SAIDI - AKRAM TAYEB - EL MEHDI EL MAHLALI Contact: saidih794@gmail.com
+Developed by HAMZA SAIDI - AKRAM TAIYB - EL MEHDI EL MAHLALI
+Contact: saidih794@gmail.com
 
