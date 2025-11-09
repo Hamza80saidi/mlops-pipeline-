@@ -1,4 +1,3 @@
- HEAD
 📊 MLOps Pipeline for Text Classification
 
 ## 📌 Project Overview
