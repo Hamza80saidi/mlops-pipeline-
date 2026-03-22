@@ -51,7 +51,7 @@ mlops-pipeline/
 
 ### 1. Clone the repository
 
-git clone https://github.com/yourusername/mlops-pipeline-.git
+git clone https://github.com/Hamza80saidi/mlops-pipeline-.git
 cd mlops-pipeline
 ### 2. Create a virtual environment
 
